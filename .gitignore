@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# build output (regenerate with `npm run build`)
+dist/
+
+# logs
+*.log
+
+# vite temp config cache
+vite.config.js.timestamp-*.mjs
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
