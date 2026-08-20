@@ -41,7 +41,7 @@ export default function FilterBar({
 
     const check = () => {
       const rect = el.getBoundingClientRect()
-      setIsStuck(rect.top <= 82)
+      setIsStuck(rect.top <= 84)
     }
 
     check()

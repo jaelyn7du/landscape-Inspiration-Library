@@ -275,7 +275,7 @@ export default function App() {
         filtered={filteredItems.length}
       />
 
-      <Hero items={items} onExplore={scrollToLibrary} onPersonal={() => goAdmin('overview')} />
+      <Hero items={items} onExplore={scrollToLibrary} onPersonal={() => goAdmin('overview')} onOpenItem={(it) => setDetailId(it.id)} />
 
       {tab === 'library' ? (
         <section className="section container" id="library" ref={libraryRef}>

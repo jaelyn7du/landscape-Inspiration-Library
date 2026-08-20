@@ -5,7 +5,7 @@ import CardSwap, { Card as SwapCard } from './CardSwap.jsx'
 
 const HERO_IMAGE = './小红书素材爬取/一窥世界-重庆龙湖江屿海棠.jpeg'
 
-export default function Hero({ items, onExplore, onPersonal }) {
+export default function Hero({ items, onExplore, onPersonal, onOpenItem }) {
   const stats = useMemo(() => {
     const styles = new Set()
     const types = new Set()
@@ -21,21 +21,22 @@ export default function Hero({ items, onExplore, onPersonal }) {
   }, [items])
 
   /* 取素材库前 6 张有图的照片用于右侧 CardSwap 轮播 */
+  const swapItems = useMemo(
+    () => items.filter((i) => i.image_url).slice(0, 6),
+    [items]
+  )
   const swapCards = useMemo(
     () =>
-      items
-        .filter((i) => i.image_url)
-        .slice(0, 6)
-        .map((i) => (
-          <SwapCard key={i.id}>
-            <img
-              src={i.image_url}
-              alt={i.title || '素材照片'}
-              className="swap-card-image"
-            />
-          </SwapCard>
-        )),
-    [items]
+      swapItems.map((i) => (
+        <SwapCard key={i.id}>
+          <img
+            src={i.image_url}
+            alt={i.title || '素材照片'}
+            className="swap-card-image"
+          />
+        </SwapCard>
+      )),
+    [swapItems]
   )
 
   /* ---------- Interactive Discovery: 鼠标跟随聚光灯 ---------- */
@@ -155,16 +156,17 @@ export default function Hero({ items, onExplore, onPersonal }) {
 
       {/* 右侧：CardSwap 照片堆叠轮播 */}
       <div className="hero-card-swap" aria-hidden="true">
-        <div className="hero-swap-tip">素材库精选 · 悬停暂停</div>
+        <div className="hero-swap-tip">素材库精选 · 悬停暂停 · 点击查看详情</div>
         <CardSwap
-          width={280}
-          height={360}
-          cardDistance={45}
-          verticalDistance={55}
+          width={260}
+          height={340}
+          cardDistance={30}
+          verticalDistance={45}
           delay={4500}
           pauseOnHover={true}
           skewAmount={5}
           easing="elastic"
+          onCardClick={(idx) => onOpenItem?.(swapItems[idx])}
         >
           {swapCards}
         </CardSwap>

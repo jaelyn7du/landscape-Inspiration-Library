@@ -76,7 +76,6 @@ body {
   color: var(--gray-200);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 button,
@@ -526,9 +525,9 @@ select {
 /* 右侧 CardSwap 照片轮播 */
 .hero-card-swap {
   position: absolute;
-  top: 50%;
-  right: 90px;
-  transform: translateY(-50%);
+  top: 46%;
+  right: 150px;
+  transform: translateY(-54%);
   z-index: 8;
   width: 300px;
   height: 400px;
@@ -660,8 +659,9 @@ select {
    分类标签栏与筛选工具栏（吸顶固定）
    ================================================================== */
 .sticky-tools {
+  position: -webkit-sticky;
   position: sticky;
-  top: 82px;
+  top: 84px;
   z-index: 900;
   margin: 0 0 24px;
   border-radius: var(--radius-xl);

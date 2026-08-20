@@ -17,12 +17,18 @@
   border: 1px solid rgba(255, 255, 255, 0.55);
   background: #0f1419;
   overflow: hidden;
+  cursor: pointer;
 
   transform-style: preserve-3d;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: filter 0.25s ease, box-shadow 0.25s ease;
+}
+.swap-card:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
 }
 
 .swap-card img {
