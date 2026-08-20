@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { SORT_OPTIONS } from '../data/items.js'
 import SpecularButton from './SpecularButton.jsx'
 
@@ -30,27 +30,11 @@ export default function FilterBar({
   activeChips,
 }) {
   const [markOpen, setMarkOpen] = useState(false)
-  const [isStuck, setIsStuck] = useState(false)
-  const stickyRef = useRef(null)
 
   const markLabel = MARK_OPTIONS.find((o) => o.value === filters.mark)?.label
 
-  useEffect(() => {
-    const el = stickyRef.current
-    if (!el) return undefined
-
-    const check = () => {
-      const rect = el.getBoundingClientRect()
-      setIsStuck(rect.top <= 84)
-    }
-
-    check()
-    window.addEventListener('scroll', check, { passive: true })
-    return () => window.removeEventListener('scroll', check)
-  }, [])
-
   return (
-    <div ref={stickyRef} className={`sticky-tools${isStuck ? ' is-stuck' : ''}`}>
+    <div className="sticky-tools">
       {/* 一级分类 — SpecularButton 镜面按钮组 */}
       <div className="cat-bar cat-specular-container">
         <div className="specular-btn-group">

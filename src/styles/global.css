@@ -124,7 +124,7 @@ select {
   padding: 0 14px 0 22px;
   border-radius: var(--radius-pill);
   transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease),
-    border-color 0.4s var(--ease), top 0.35s var(--ease), height 0.35s var(--ease);
+    border-color 0.4s var(--ease);
 
   /* 玻璃材质 */
   background: rgba(15, 46, 34, 0.28);
@@ -136,8 +136,6 @@ select {
 
 /* 滚动后：深色玻璃 */
 .nav.scrolled {
-  top: 10px;
-  height: 58px;
   background: rgba(15, 20, 25, 0.75);
   border-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.3);
@@ -647,10 +645,7 @@ select {
    分类标签栏与筛选工具栏（吸顶固定）
    ================================================================== */
 .sticky-tools {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 84px;
-  z-index: 900;
+  position: relative;
   margin: 0 0 24px;
   border-radius: var(--radius-xl);
   padding: 14px 18px;
@@ -660,12 +655,6 @@ select {
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
   transition: background 0.25s, box-shadow 0.25s, border-color 0.25s;
-}
-
-.sticky-tools.is-stuck {
-  background: rgba(10, 14, 18, 0.92);
-  border-color: rgba(168, 230, 196, 0.22);
-  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(168, 230, 196, 0.08);
 }
 
 .cat-bar {
