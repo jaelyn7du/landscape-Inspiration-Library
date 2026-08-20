@@ -11,6 +11,7 @@ function normalize(item, index) {
     id: item.id || `item-${index}`,
     title: item.title || item.file_name || '未命名',
     image_url: normalizeUrl(item.image_url),
+    source_platform: item.source_platform || detectPlatform(item.image_url),
     style_tags: arr(item.style_tags),
     material_tags: arr(item.material_tags),
     color_tags: arr(item.color_tags),
@@ -38,6 +39,19 @@ function normalizeUrl(url) {
   if (!u.startsWith('/') && !u.startsWith('./')) u = './' + u
   if (u.startsWith('/')) u = '.' + u
   return u
+}
+
+/**
+ * 根据图片 URL 自动识别来源平台
+ * 小红书 CDN：sns-webpic-qc.xhscdn.com
+ * Pinterest CDN：i.pinimg.com
+ */
+function detectPlatform(url) {
+  if (!url) return ''
+  const u = String(url).toLowerCase()
+  if (u.includes('sns-webpic-qc.xhscdn.com')) return '小红书'
+  if (u.includes('i.pinimg.com')) return 'Pinterest'
+  return ''
 }
 
 export const allItems = (rawItems || []).map(normalize)

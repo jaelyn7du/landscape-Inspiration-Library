@@ -20,11 +20,15 @@ export default function Hero({ items, onExplore, onPersonal, onOpenItem }) {
     }
   }, [items])
 
-  /* 取素材库前 6 张有图的照片用于右侧 CardSwap 轮播 */
-  const swapItems = useMemo(
-    () => items.filter((i) => i.image_url).slice(0, 6),
-    [items]
-  )
+  /* 从灵感库随机抽取 6 张有图的照片用于右侧 CardSwap 轮播 */
+  const [swapItems] = useState(() => {
+    const list = items.filter((i) => i.image_url)
+    for (let i = list.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[list[i], list[j]] = [list[j], list[i]]
+    }
+    return list.slice(0, 6)
+  })
   const swapCards = useMemo(
     () =>
       swapItems.map((i) => (
@@ -156,7 +160,6 @@ export default function Hero({ items, onExplore, onPersonal, onOpenItem }) {
 
       {/* 右侧：CardSwap 照片堆叠轮播 */}
       <div className="hero-card-swap" aria-hidden="true">
-        <div className="hero-swap-tip">素材库精选 · 悬停暂停 · 点击查看详情</div>
         <CardSwap
           width={260}
           height={340}
