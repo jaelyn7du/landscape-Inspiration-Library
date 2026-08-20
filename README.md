@@ -67,10 +67,28 @@ web\
 
 ## 部署到 GitHub Pages
 
-项目已设置 `base: './'`，构建产物可部署到任意子路径（含 `https://<user>.github.io/<repo>/`）：
+项目已设置 `base: './'`，构建产物可部署到任意子路径（含 `https://<user>.github.io/<repo>/`）。
 
-1. `npm install`
-2. `npm run build`（产物在 `dist/`）
-3. 将 `dist/` 内容推送到 `gh-pages` 分支，或用 GitHub Actions 自动部署。
+### 方式一：GitHub Actions 自动部署（推荐，零手动构建）
 
-也可直接将 `dist/` 托管到任意静态服务器。
+仓库已包含 `.github/workflows/deploy.yml`，推送后自动构建并发布：
+
+1. 在 GitHub 新建仓库（例如 `landscape-inspiration`）。
+2. 本地关联并推送：
+   ```bash
+   git remote add origin https://github.com/<你的用户名>/<仓库名>.git
+   git branch -M master
+   git push -u origin master
+   ```
+3. 仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
+4. 此后每次 `git push` 都会自动重新部署，站点地址在 Actions 运行结束后显示。
+
+> 注意：`dist/` 已被 `.gitignore` 忽略，无需手动提交；Actions 会在云端重新构建。
+
+### 方式二：手动上传 `dist/`（不用 Actions）
+
+1. `npm run build` 生成 `dist/`。
+2. 把 `dist/` 整个文件夹作为仓库内容推送（需先 `git add -f dist` 强制加入，因其被忽略）。
+3. Settings → Pages → Source 选择 **Deploy from a branch** → 分支 `master` → 目录 `/dist`。
+
+也可直接将 `dist/` 托管到任意静态服务器（Netlify / Vercel / 对象存储等）。
